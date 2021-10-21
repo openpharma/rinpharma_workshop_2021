@@ -15,11 +15,13 @@ seq_fun <- function(.df, n){
 source("programs/sdtm/dm.R")
 source("programs/sdtm/ae.R")
 source("programs/sdtm/vs.R")
+source("programs/sdtm/ds.R")
 
 
 saveRDS(DM, "data/DM.rds")
 saveRDS(AE, "data/AE.rds")
 saveRDS(VS, "data/VS.rds")
+saveRDS(DS, "data/DS.rds")
 
 
 
