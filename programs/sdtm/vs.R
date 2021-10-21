@@ -1,3 +1,4 @@
+### Make a structure for VS
 
 TESTCDS <- tribble(
   ~VSTESTCD, ~VSTEST, ~ VSORRESU,
@@ -13,7 +14,8 @@ visits <- c("BASELINE", paste0("VISIT", seq(1, 8)))
 vlbfl <- c("Y", rep("", 8))
 
 Vital_vars <- dplyr::bind_rows(
-  Map(function(x, y){TESTCDS$VISIT <- x; TESTCDS$VSBLFL <- y; TESTCDS}, visits, vlbfl)
+  Map(function(x, y){TESTCDS$VISIT <- x; TESTCDS$VSBLFL <- y; TESTCDS},
+      visits, vlbfl)
 )
 
 vital_join <- dplyr::bind_rows(
@@ -30,6 +32,8 @@ join_visit <- function(n, .df, .dbtab){
 vs_join_recipe <- tribble(
   ~foreign_tbl, ~foreign_key, ~dependencies, ~func, ~func_args,
   "DM", "USUBJID", no_deps, join_visit, NULL)
+
+### Functions for making VS
 
 VSval <- function(.df, n){
   inner_calc <- function(tstcd){
@@ -65,7 +69,7 @@ date_gen <- function(.df, n){
   as.Date(.df$RFSTDTC) + lubridate::days((.df$VISITNUM-1) * 14)
 }
 
-VS_recipe<- tribble(
+VS_recipe <- tribble(
   ~variables,      ~dependencies,            ~func,               ~func_args,
   "DOMAIN",        NULL,                     rep_n,               list(val = "VS"),
   "VSSEQ",         "USUBJID",                seq_fun,             NULL,

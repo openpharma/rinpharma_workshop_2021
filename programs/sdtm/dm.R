@@ -1,6 +1,6 @@
 ### Functions for making demographic variables
 
-usub_fun <- function(.df, n = nrow(df)){
+make_usub <- function(.df, n = nrow(df)){
   paste(.df$STUDYID, .df$SITEID, .df$SUBJID, sep = "-")
 }
 
@@ -25,13 +25,13 @@ death_flag <- function(.df, n = nrow(df)){
   ifelse(is.na(.df$DTHDTC), "N", "Y")
 }
 
-arm_fn <- function(.df, n = nrow(df), arms){
+make_arm <- function(.df, n = nrow(df), arms){
   out <- .df$ARMCD
   fct_recode(out, !!!arms)
   out
 }
 
-age_fn <- function(n, min_age, max_age){
+make_age <- function(n, min_age, max_age){
   sample(seq(min_age, max_age), n, replace = TRUE)
 }
 
@@ -45,28 +45,30 @@ s_country <- c("CHN", "USA", "BRA", "PAK", "NGA", "RUS", "JPN", "GBR", "CAN", "C
 usub_dep  <- c("STUDYID", "SUBJID", "SITEID")
 rfe_deps <- c("RFSTDTC", "DTHDTC")
 
+### Recipe
+
 dm_recipe <- tribble(
   ~variables,       ~dependencies,      ~func,               ~func_args,
   "STUDYID",        no_deps,            rep_n,              list(val = "a12345"),
   "DOMAIN",         no_deps,            rep_n,              list(val = "DM"),
-  "USUBJID",        usub_dep,           usub_fun,           NULL,
+  "USUBJID",        usub_dep,           make_usub,          NULL,
   "SUBJID",         no_deps,            subjid_func,        NULL,
   "RFSTDTC",        no_deps,            rand_posixct,       list(start = "2019-01-01", end = "2019-06-01"),
   "RFENDTC",        rfe_deps,           end_date,           list(end_date = "2021-06-01"),
   "DTHDTC",         "RFSTDTC",          death_date,         list(end_date = "2021-06-01", death_prob = 0.2),
   "DTHFL",          "DTHDTC",           death_flag,         NULL,
   "SITEID",         no_deps,            sample_fct,         list(x = c("1", "2", "3")),
-  "AGE",            no_deps,            age_fn,             list(min_age = 18, max_age = 80),
+  "AGE",            no_deps,            make_age,           list(min_age = 18, max_age = 80),
   "SEX",            no_deps,            sample_fct,         list(x = c("MALE", "FEMALE")),
   "RACE",           no_deps,            sample_fct,         list(x = s_race),
   "ARMCD",          no_deps,            sample_fct,         list(x = c("A1", "A2", "A3")),
-  "ARM",            "ARMCD",            arm_fn,             list(arms = c("ARM 1" = "A1", "ARM 2" = "A2", "ARM 3" = "A3")),
+  "ARM",            "ARMCD",            make_arm,           list(arms = c("ARM 1" = "A1", "ARM 2" = "A2", "ARM 3" = "A3")),
   "COUNTRY",        no_deps,            sample_fct,         list(x = s_country)
 )
 
 
 DM_recipe <- tibble(
-  variables =dm_variables ,
+  variables = dm_variables ,
   dependencies = dm_dep,
   func = dm_funcs,
   func_args = dm_args

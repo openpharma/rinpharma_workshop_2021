@@ -1,4 +1,9 @@
-join_fun <- rand_per_key("USUBJID", mincount = 0, maxcount = 5, prop_present = 1)
+### set up recipe for structure of AE
+
+
+# Join random number of records per patient
+join_fun <- rand_per_key("USUBJID", mincount = 0,
+                         maxcount = 5, prop_present = 1)
 
 join_fun_removedomain <- function(n, .dbtab, .df){
   X <- join_fun(n, .dbtab, .df)
@@ -9,6 +14,7 @@ join_fun_removedomain <- function(n, .dbtab, .df){
 AE_join_recipe <-  tribble(~foreign_tbl, ~foreign_key, ~func, ~func_args,
                            "DM", "USUBJID", "join_fun_removedomain", list())
 
+####### Functions needed for making ae
 
 ae_lookup <- tribble(
   ~AEBODSYS, ~AELLT,          ~AEDECOD,        ~AEHLT,        ~AEHLGT,      ~AETOXGR, ~AESOC, ~AESER, ~AREL,
@@ -27,6 +33,7 @@ ae_lookup <- tribble(
 aes_func <- function(n, .df, lookup = ae_lookup) {
   lookup[sample(1:NROW(lookup), NROW(.df), replace =TRUE),]
 }
+
 aeterm_func <- function(n, .df) gsub("dcd", "trm", .df$AEDECOD, fixed=TRUE)
 
 aesev_func <- function(n, .df) {
@@ -40,6 +47,7 @@ aesev_func <- function(n, .df) {
 
 
 }
+
 time_func <- function(n, .df) {
   tstart <- .df$RFSTDTC
   tend <- .df$RFENDTC
@@ -54,9 +62,9 @@ aet_vars <- c("AESTDTC", "AEENDTC")
 aet_deps <- c("RFSTDTC", "RFENDTC")
 
 AE_recipe<- tribble(
-  ~variables,       ~dependencies,      ~func,               ~func_args,
-  "DOMAIN",          NULL,              rep_n,               list(val = "AE"),
-  "AESEQ",          "USUBJID",          seq_fun,             NULL,
+  ~variables,       ~dependencies,      ~func,              ~func_args,
+  "DOMAIN",          NULL,              rep_n,              list(val = "AE"),
+  "AESEQ",          "USUBJID",          seq_fun,            NULL,
   names(ae_lookup), NULL,               aes_func,           list(lookup = ae_lookup),
   "AETERM",         "AEDECOD",          aeterm_func,        NULL,
   "AESEV",          "AETOXGR",          aesev_func,         NULL,
