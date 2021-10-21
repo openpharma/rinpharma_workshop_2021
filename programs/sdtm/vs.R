@@ -10,8 +10,8 @@ TESTCDS <- tribble(
   "WEIGHT", 	"Weight", 	"kg"
 )
 
-visits <- c("BASELINE", paste0("VISIT", seq(1, 8)))
-vlbfl <- c("Y", rep("", 8))
+visits <- c("BASELINE", paste0("VISIT", seq(1, 4)))
+vlbfl <- c("Y", rep("", 4))
 
 Vital_vars <- dplyr::bind_rows(
   Map(function(x, y){TESTCDS$VISIT <- x; TESTCDS$VSBLFL <- y; TESTCDS},
