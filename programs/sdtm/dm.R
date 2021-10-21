@@ -37,7 +37,7 @@ death_flag <- function(.df, n = nrow(df)){
 
 make_arm <- function(.df, n = nrow(df), arms){
   out <- .df$ARMCD
-  fct_recode(out, !!!arms)
+  forcats::fct_recode(out, !!!arms)
   out
 }
 
@@ -85,4 +85,4 @@ DM_recipe <- tribble(
 
 
 
-DM <- gen_table_data(N = 100, recipe = DM_recipe)
+DM <- gen_table_data(N = 60, recipe = DM_recipe)
