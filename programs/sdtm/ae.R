@@ -2,7 +2,7 @@
 
 
 # Join random number of records per patient
-join_fun <- rand_per_key("USUBJID", mincount = 0,
+join_fun <- rand_per_key("USUBJID", "DM", mincount = 0,
                          maxcount = 5, prop_present = 1)
 
 join_fun_removedomain <- function(n, .dbtab, .df){

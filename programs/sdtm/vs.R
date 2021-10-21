@@ -22,8 +22,8 @@ vital_join <- dplyr::bind_rows(
   lapply(DM$USUBJID, function(x){Vital_vars$USUBJID = x; Vital_vars})
 )
 
-join_visit <- function(n, .df, .dbtab){
-  X<- merge(.dbtab, vital_join, by = "USUBJID", all = TRUE)
+join_visit <- function(n, .df, .db){
+  X<- merge(.db[["DM"]], vital_join, by = "USUBJID", all = TRUE)
   subset(X, select = - DOMAIN)
 }
 
