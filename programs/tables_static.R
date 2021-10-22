@@ -18,7 +18,7 @@ adsl__AGEG18 <- asl %>%
 tbl_dm__ITT <- t_dm(
   adsl = adsl__ITT,
   title = 'Demographic and Baseline Characteristics',
-  subtitle = 'GA0001',
+  subtitle = 'Protocol: AB12345',
   main_footer ='Test footnotes'
 )
 
