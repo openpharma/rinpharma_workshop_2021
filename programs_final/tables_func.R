@@ -25,7 +25,11 @@ s_summary_dm <- function(x) {
     )
   } else if (is.factor(x)) {
 
-    vs <- as.list(table(x))
+    vs <- c(
+      list("n" = sum(!is.na(x))),
+      as.list(table(x))
+    )
+
     do.call(in_rows, lapply(vs, rcell, format = "xx"))
 
   } else (
@@ -94,7 +98,7 @@ t_ae <- function(adae, adsl, title = "", subtitle = "", main_footer = "") {
       subtitle = subtitle,
       main_footer = main_footer
     ) %>%
-    split_cols_by("ARM") %>%
+    split_cols_by("ARM", split_fun = add_overall_level("All Patients", first = FALSE)) %>%
     add_colcounts() %>%
     summarize_row_groups("USUBJID", cfun = s_events_patients) %>%
     split_rows_by(
