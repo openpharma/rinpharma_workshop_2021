@@ -39,7 +39,7 @@ saveRDS(DM, "data/DM.rds")
 saveRDS(AE, "data/AE.rds")
 saveRDS(VS, "data/VS.rds")
 saveRDS(DS, "data/DS.rds")
-saveRDS(DS, "data/EX.rds")
+saveRDS(EX, "data/EX.rds")
 
 
 
