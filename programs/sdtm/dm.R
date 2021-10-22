@@ -1,3 +1,6 @@
+library(respectables)                   # https://roche.github.io/respectables/
+library(tibble)
+
 ### Functions for making demographic variables
 
 source("programs/sdtm/functions/make_usub.R")

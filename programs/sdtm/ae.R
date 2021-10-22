@@ -1,5 +1,6 @@
 ### set up recipe for structure of AE
-
+library(respectables)                   # https://roche.github.io/respectables/
+library(tibble)
 
 # Join random number of records per patient
 join_fun <- rand_per_key("USUBJID", "DM", mincount = 0,
