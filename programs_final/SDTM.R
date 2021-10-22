@@ -12,10 +12,10 @@ seq_fun <- function(.df, n){
 
 }
 
-source("programs/sdtm/dm.R")
-source("programs/sdtm/ae.R")
-source("programs/sdtm/vs.R")
-source("programs/sdtm/ds.R")
+source("programs_final/sdtm/dm.R")
+source("programs_final/sdtm/ae.R")
+source("programs_final/sdtm/vs.R")
+source("programs_final/sdtm/ds.R")
 
 
 saveRDS(DM, "data/DM.rds")
