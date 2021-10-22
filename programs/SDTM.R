@@ -1,38 +1,22 @@
 
 
 library(respectables)                   # https://roche.github.io/respectables/
-# library(synthetic.cdisc.data)           # https://roche.github.io/synthetic.cdisc.data/
 library(tibble)
 
 
-seq_fun <- function(.df, n){
-  spl <- split(seq_along(.df$USUBJID), .df$USUBJID)
-  sp <-lapply(spl, function(x){seq_along(x)})
-  unlist(sp)
+source("programs/sdtm/functions/seq_fun.R")
 
-}
+# These are incomplete! We need to update these!
+source("programs/sdtm/dm.R")
+source("programs/sdtm/ae.R")
+source("programs/sdtm/vs.R")
 
-source("programs_final/sdtm/dm.R")
-source("programs_final/sdtm/ae.R")
-source("programs_final/sdtm/vs.R")
-source("programs_final/sdtm/ds.R")
-source("programs_final/sdtm/ex.R")
+## These are complete; do not touch!
+source("programs/sdtm/ds.R")
+source("programs/sdtm/ex.R")
 
+# Modify dates here!
 
-datemutator <- function(dataset){
-  ds_names <- names(dataset)
-  dtc_names <- ds_names[grepl("DTC", ds_names)]
-  for (date_name in dtc_names){
-    dataset[[date_name]] <- as.character(dataset[[date_name]])
-  }
-  dataset
-}
-
-DM <- datemutator(DM)
-AE <- datemutator(AE)
-VS <- datemutator(VS)
-DS <- datemutator(DS)
-EX <- datemutator(EX)
 
 
 saveRDS(DM, "data/DM.rds")
