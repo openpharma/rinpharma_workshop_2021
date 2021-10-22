@@ -6,24 +6,21 @@ vs <- readRDS("data/VS.rds")
 adsl <- readRDS("data/ADSL.rds")
 
 param_lookup <- tibble::tribble(
-  ~VSTESTCD, ~PARAMCD, ~PARAM,                            ~PARAMN,
-  "SYSBP",   "SYSBP",  "Systolic Blood Pressure (mmHg)",  1,
-  "DIABP",   "DIABP",  "Diastolic Blood Pressure (mmHg)", 2,
-  "PULSE",   "PULSE",  "Pulse Rate (beats/min)",          3,
-  "WEIGHT",  "WEIGHT", "Weight (kg)",                     4,
-  "HEIGHT",  "HEIGHT", "Height (cm)",                     5,
-  "TEMP",    "TEMP",   "Temperature (C)",                 6,
-  "MAP",     "MAP",    "Mean Arterial Pressure (mmHg)",   7,
-  "BMI",     "BMI",    "Body Mass Index(kg/m^2)",         8,
-  "BSA",     "BSA",    "Body Surface Area(m^2)",          9
+  ~VSTESTCD, ~PARAMCD, ~PARAM,
+  "SYSBP",   "SYSBP",  "Systolic Blood Pressure (mmHg)",
+  "DIABP",   "DIABP",  "Diastolic Blood Pressure (mmHg)",
+  "PUL",     "PULSE",  "Pulse Rate (beats/min)",
+  "WGHT",    "WEIGHT", "Weight (kg)",
+  "HGHT",    "HEIGHT", "Height (cm)",
+  "EMP",     "TEMP",   "Temperature (C)"
 )
 
 range_lookup <- tibble::tribble(
   ~PARAMCD, ~ANRLO, ~ANRHI, ~A1LO, ~A1HI,
-  "SYSBP", 90, 130, 70, 140,
-  "DIABP", 60, 80, 40, 90,
-  "PULSE", 60, 100, 40, 110,
-  "TEMP", 36.5, 37.5, 35, 38
+  "SYSBP",  90,     130,    70,    140,
+  "DIABP",  60,      80,    40,     90,
+  "PUL",    60,     100,    40,    110,
+  "TMP",    36.5,    37.5,  35,     38
 )
 
 advs <- vs %>%
@@ -60,6 +57,13 @@ advs <- vs %>%
     by_vars = vars(STUDYID, USUBJID, PARAMCD)
   ) %>%
   derive_var_chg() %>%
-  derive_var_pchg()
+  derive_var_pchg() %>%
+  left_join(range_lookup, by = "PARAMCD") %>%
+  derive_var_anrind() %>%
+  derive_baseline(
+    by_vars = vars(STUDYID, USUBJID, PARAMCD),
+    source_var = ANRIND,
+    new_var = BNRIND
+  )
 
 saveRDS(advs, file = "data/ADVS.rds")
