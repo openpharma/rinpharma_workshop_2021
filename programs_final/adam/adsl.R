@@ -44,6 +44,12 @@ adsl <- dm %>%
     filter = DSCAT == "DISPOSITION EVENT" & DSDECOD != "SCREEN FAILURE",
     date_imputation = NULL
   ) %>%
+  derive_disposition_status(
+    dataset_ds = ds,
+    new_var = EOSSTT,
+    status_var = DSDECOD,
+    filter = DSCAT == "DISPOSITION EVENT"
+  ) %>%
   mutate(
     ITTFL = if_else(!is.na(RANDDT), "Y", NA_character_),
     SAFFL = if_else(!is.na(TRTSDT), "Y", NA_character_),
