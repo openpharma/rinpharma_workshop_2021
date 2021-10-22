@@ -51,7 +51,12 @@ VS_recipe <- tribble(
   "VISITNUM",      "VISIT",                  visitn_fn,           NULL,
   "VSDTC",         c("RFSTDTC","VISITNUM"),  date_gen,            NULL
 
-)
+) %>%
+  dplyr::mutate(
+    VSORRES = as.character(VSORRES),
+    VSSTRESC = VSORRES,
+    VSSTRESN = as.numeric(VSORRES)
+  )
 
 
 
