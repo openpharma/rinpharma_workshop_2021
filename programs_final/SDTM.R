@@ -24,6 +24,7 @@ datemutator <- function(dataset){
   dtc_names <- ds_names[grepl("DTC", ds_names)]
   for (date_name in dtc_names){
     dataset[[date_name]] <- as.character(dataset[[date_name]])
+    dataset[[date_name]] <- gsub(" ", "T", dataset[[date_name]])
   }
   dataset
 }
