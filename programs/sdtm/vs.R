@@ -51,17 +51,17 @@ VS_recipe <- tribble(
   "VISITNUM",      "VISIT",                  visitn_fn,           NULL,
   "VSDTC",         c("RFSTDTC","VISITNUM"),  date_gen,            NULL
 
-) %>%
-  dplyr::mutate(
-    VSORRES = as.character(VSORRES),
-    VSSTRESC = VSORRES,
-    VSSTRESN = as.numeric(VSORRES)
-  )
-
+)
 
 
 
 
 VS <- gen_reljoin_table(vs_join_recipe, VS_recipe, db = list(DM = DM),
                         keep = c("STUDYID", "SITEID", "USUBJID", "VISIT",
-                                 "VSTESTCD", "VSTEST", "VSORRESU", "VSBLFL"))
+                                 "VSTESTCD", "VSTEST", "VSORRESU", "VSBLFL"))%>%
+  dplyr::mutate(
+    VSORRES = as.character(VSORRES),
+    VSSTRESC = VSORRES,
+    VSSTRESN = as.numeric(VSORRES)
+  )
+
