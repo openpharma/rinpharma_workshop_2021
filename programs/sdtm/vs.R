@@ -35,39 +35,13 @@ vs_join_recipe <- tribble(
 
 ### Functions for making VS
 
-VSval <- function(.df, n){
-  inner_calc <- function(tstcd){
-    if(tstcd == "DIABP"){
-      return(round(runif(1, 50, 80), 0))
-    }
-    if(tstcd == "HEIGHT"){
-      return(round(runif(1, 140, 210), 0))
-    }
-    if(tstcd == "PULSE"){
-      return(round(runif(1, 50, 80), 0))
-    }
-    if(tstcd == "SYSBP"){
-      return(round(runif(1, 100, 160), 0))
-    }
-    if(tstcd == "TEMP"){
-      return(round(runif(1, 35, 40), 2))
-    }
-    if(tstcd == "WEIGHT"){
-      return(round(runif(1, 50, 120), 2))
-    }
-  }
-  sapply(.df$VSTESTCD, inner_calc)
-}
+source("programs/sdtm/functions/vsval.R")
+source("programs/sdtm/functions/visit_fun.R")
+source("programs/sdtm/functions/vs_date_gen.R")
 
-visitn_fn <- function(.df, n){
-  as.numeric(ifelse(grepl("\\d", .df$VISIT),
-                    regmatches(.df$VISIT,regexpr("\\d",.df$VISIT)),
-                    1))
-}
 
-date_gen <- function(.df, n){
-  as.Date(.df$RFSTDTC) + lubridate::days((.df$VISITNUM-1) * 14)
-}
+
+
 
 VS_recipe <- tribble(
   ~variables,      ~dependencies,            ~func,               ~func_args,
@@ -82,7 +56,12 @@ VS_recipe <- tribble(
 
 
 
-
 VS <- gen_reljoin_table(vs_join_recipe, VS_recipe, db = list(DM = DM),
                         keep = c("STUDYID", "SITEID", "USUBJID", "VISIT",
-                                 "VSTESTCD", "VSTEST", "VSORRESU", "VSBLFL"))
+                                 "VSTESTCD", "VSTEST", "VSORRESU", "VSBLFL"))%>%
+  dplyr::mutate(
+    VSORRES = as.character(VSORRES),
+    VSSTRESC = VSORRES,
+    VSSTRESN = as.numeric(VSORRES)
+  )
+
