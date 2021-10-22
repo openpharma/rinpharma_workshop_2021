@@ -32,7 +32,32 @@ adae <- ae %>%
   ) %>%
   mutate(
     ASEV = AESEV,
-    ATOXGR = as.numeric(AETOXGR)
+    ATOXGR = as.numeric(AETOXGR),
+    TRTEMFL = if_else(ASTDT >= TRTSDT & ASTDT <= TRTEDT + days(30), "Y", NA_character_),
+    ANL01FL = if_else(TRTEMFL == "Y" & ASTDT <= TRTEDT, "Y", NA_character_),
+    PREFL = if_else(ASTDT < TRTSDT, "Y", NA_character_),
+    FUPFL = if_else(ASTDT > TRTSDT, "Y", NA_character_)
+  ) %>%
+  derive_extreme_flag(
+    by_vars = vars(USUBJID),
+    order = vars(ASTDTM, ATOXGR, AESEQ),
+    new_var = AOCCIFL,
+    filter = ANL01FL == "Y",
+    mode = "last"
+  ) %>%
+  derive_extreme_flag(
+    by_vars = vars(USUBJID, AEDECOD),
+    order = vars(ASTDTM, ATOXGR, AESEQ),
+    new_var = AOCCPIFL,
+    filter = ANL01FL == "Y",
+    mode = "last"
+  ) %>%
+  derive_extreme_flag(
+    by_vars = vars(USUBJID, AEBODSYS),
+    order = vars(ASTDTM, ATOXGR, AESEQ),
+    new_var = AOCCSIFL,
+    filter = ANL01FL == "Y",
+    mode = "last"
   )
 
 saveRDS(adae, file = "data/ADAE.rds")
