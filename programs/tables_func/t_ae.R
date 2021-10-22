@@ -95,7 +95,8 @@ t_ae <- function(adae, adsl, title = "", subtitle = "", main_footer = "") {
     # Update the label in the top left header.
     append_topleft("--Add a label--")
 
-  build_table(lyt, df = adae, alt_counts_df = adsl)
+  # Specify the datasets used to build the layout.
+  build_table(lyt, df = , alt_counts_df = )
 }
 
 # Try it out:
