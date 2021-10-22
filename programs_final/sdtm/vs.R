@@ -69,6 +69,8 @@ date_gen <- function(.df, n){
   as.Date(.df$RFSTDTC) + lubridate::days((.df$VISITNUM-1) * 14)
 }
 
+
+
 VS_recipe <- tribble(
   ~variables,      ~dependencies,            ~func,               ~func_args,
   "DOMAIN",        NULL,                     rep_n,               list(val = "VS"),
@@ -85,4 +87,9 @@ VS_recipe <- tribble(
 
 VS <- gen_reljoin_table(vs_join_recipe, VS_recipe, db = list(DM = DM),
                         keep = c("STUDYID", "SITEID", "USUBJID", "VISIT",
-                                 "VSTESTCD", "VSTEST", "VSORRESU", "VSBLFL"))
+                                 "VSTESTCD", "VSTEST", "VSORRESU", "VSBLFL")) %>%
+  mutate(
+    VSORRES = as.character(VSORRES),
+    VSSTRESC = VSORRES,
+    VSSTRESN = as.numeric(VSORRES)
+  )
