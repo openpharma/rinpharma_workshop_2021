@@ -22,7 +22,7 @@ source("programs/sdtm/functions/ae_sev.R")
 source("programs/sdtm/functions/ae_tox.R")
 source("programs/sdtm/functions/ae_other.R")
 
-
+# a comment
 
 
 aet_vars <- c("AESTDTC", "AEENDTC")
