@@ -15,7 +15,7 @@ DS_join_recipe <-  tribble(~foreign_tbl, ~foreign_key, ~func, ~func_args,
 
 ####### Functions needed for making ae
 
-dsvars <- c("DSDECOD", "DSCAT", "DSSCAT","DSTERM", "DSSDTC")
+dsvars <- c("DSDECOD", "DSCAT", "DSSCAT","DSTERM", "DSSTDTC")
 ds_deps <- c("USUBJID", "DTHDTC", "RFSTDTC", "RFENDTC", "RFXSTDTC")
 ds_fun <- function(.df, n){
   split_df <- split(.df, factor(.df$USUBJID))
