@@ -88,7 +88,7 @@ VS_recipe <- tribble(
 VS <- gen_reljoin_table(vs_join_recipe, VS_recipe, db = list(DM = DM),
                         keep = c("STUDYID", "SITEID", "USUBJID", "VISIT",
                                  "VSTESTCD", "VSTEST", "VSORRESU", "VSBLFL")) %>%
-  mutate(
+  dplyr::mutate(
     VSORRES = as.character(VSORRES),
     VSSTRESC = VSORRES,
     VSSTRESN = as.numeric(VSORRES)

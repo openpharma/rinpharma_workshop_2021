@@ -12,8 +12,8 @@ source("programs/sdtm/ae.R")
 source("programs/sdtm/vs.R")
 
 ## These are complete; do not touch!
-source("programs/sdtm/ds.R")
-source("programs/sdtm/ex.R")
+source("programs_final/sdtm/ds.R")
+source("programs_final/sdtm/ex.R")
 
 # Modify dates here!
 
@@ -23,7 +23,8 @@ saveRDS(DM, "data/DM.rds")
 saveRDS(AE, "data/AE.rds")
 saveRDS(VS, "data/VS.rds")
 saveRDS(DS, "data/DS.rds")
-saveRDS(DS, "data/EX.rds")
+saveRDS(EX, "data/EX.rds")
+
 
 
 
