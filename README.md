@@ -26,6 +26,8 @@ you might need to set your `GITHUB_PAT` best with `usethis::usethis::edit_r_envi
 * [Form for GitHub accessp](https://docs.google.com/forms/d/e/1FAIpQLSc2R7KvQgjLUtWzqKRiDHWQTrKvlTYcSm2m8yjiUi8oeN1XyQ/viewform?usp=sf_link)
 * [RStudio Cloud](https://bit.ly/3m9rrJf)
 * [Meet Jitsi](https://meet.jit.si/)
+* [SDTM, ADAM, List of Tables Specifications](https://docs.google.com/spreadsheets/d/1dR9bY_QrUoGC6mlQef9JIb-ie-yByLHTRJv4MHqxOnw/edit?usp=drive_open&ouid=104291286554057747194)
+* [Table Specifications](https://docs.google.com/document/d/1-2q14d4_CFvyG0EAhAqec3DMkRUmHPSe3BWugUSFBCM)
 * [rtables docs](https://roche.github.io/rtables/)
 * [respectables docs](https://roche.github.io/respectables/)
 * [adsl example in synthetic.cdisc.data](https://github.com/Roche/synthetic.cdisc.data/blob/main/R/adsl_recipe.R)
