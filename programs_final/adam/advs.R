@@ -12,7 +12,7 @@ param_lookup <- tibble::tribble(
   "PUL",     "PULSE",  "Pulse Rate (beats/min)",
   "WGHT",    "WEIGHT", "Weight (kg)",
   "HGHT",    "HEIGHT", "Height (cm)",
-  "EMP",     "TEMP",   "Temperature (C)"
+  "TEMP",    "TEMP",   "Temperature (C)"
 )
 
 range_lookup <- tibble::tribble(
@@ -20,11 +20,11 @@ range_lookup <- tibble::tribble(
   "SYSBP",  90,     130,    70,    140,
   "DIABP",  60,      80,    40,     90,
   "PUL",    60,     100,    40,    110,
-  "TMP",    36.5,    37.5,  35,     38
+  "TEMP",   36.5,    37.5,  35,     38
 )
 
 advs <- vs %>%
-  left_join(select(adsl, -DOMAIN), by = c("STUDYID", "USUBJID")) %>%
+  left_join(adsl, by = c("STUDYID", "USUBJID")) %>%
   derive_vars_dtm(
     new_vars_prefix = "A",
     dtc = VSDTC,
