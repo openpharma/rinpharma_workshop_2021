@@ -20,7 +20,7 @@ m_tables_ui <- function(id) {
     )
   )
 }
-m_tables_srv <- function(id, list_reactive_datasets = list()) {
+m_tables_srv <- function(id, list_reactive_datasets) {
   moduleServer(
     id,
     function(input, output, session) {

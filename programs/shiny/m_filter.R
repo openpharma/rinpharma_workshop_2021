@@ -1,4 +1,4 @@
-m_filter_ui <- function(id) {
+m_filter_ui <- function(id, data) {
   ns <- NS(id)
   tags$form(
     class = "well",
@@ -12,9 +12,9 @@ m_filter_srv <- function(id, data) {
     function(input, output, session) {
       res <- reactive({
         list(
-          adsl = data$adsl,
-          adae = data$adae,
-          advs = data$advs
+          ADSL = data$ADSL,
+          ADAE = data$ADAE,
+          ADVS = data$ADVS
         )
       })
     }
