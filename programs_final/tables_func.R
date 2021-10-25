@@ -10,13 +10,13 @@ library(rtables)            # https://roche.github.io/rtables/
 # Vignette: https://roche.github.io/rtables/articles/clinical_trials.html
 
 # Demographics Table ----
-source("tables_func/t_dm.R")
+source("programs_final/tables_func/t_dm.R")
 
 # Adverse Events Table ----
-source("tables_func/t_ae.R")
+source("programs_final/tables_func/t_ae.R")
 
 # Vital Signs Table ----
-source("tables_func/t_vs.R")
+source("programs_final/tables_func/t_vs.R")
 
 # Try it out:
 # t_dm(adsl)
