@@ -1,5 +1,5 @@
-source("shiny/m_graphs_histogram.R")
-source("shiny/m_graphs_scatterplot.R")
+source("m_graphs_histogram.R")
+source("m_graphs_scatterplot.R")
 
 m_graphs_ui <- function(id) {
   ns <- NS(id)

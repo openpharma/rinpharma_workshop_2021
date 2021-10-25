@@ -6,26 +6,26 @@ library(magrittr)
 # - t_dm - Demographics Table
 # - t_ae - Adverse Events Table
 # - t_vs - Vital Signs Table
-source("tables_func.R")
+source("programs_final/tables_func.R")
 
 # source ADAM datasets
 # uncomment below once we have a data ready
-# adsl <- source("adam/adsl.R")
-# adae <- source("adam/adae.R")
-# advs <- source("adam/advs.R")
+# adsl <- source("programs_final/adam/adsl.R")
+# adae <- source("programs_final/adam/adae.R")
+# advs <- source("programs_final/adam/advs.R")
 # data <- list(ADSL = adsl, ADAE = adae, ADVS = advs)
 data <- list(
-  ADSL = readRDS("../data_demo/ADSL.rds"),
-  ADAE = readRDS("../data_demo/ADAE.rds"),
-  ADVS = readRDS("../data_demo/ADVS.rds")
+  ADSL = readRDS("data_demo/ADSL.rds"),
+  ADAE = readRDS("data_demo/ADAE.rds"),
+  ADVS = readRDS("data_demo/ADVS.rds")
 )
 
 # source modules
-source("shiny/m_filter.R")
-source("shiny/m_home.R")
-source("shiny/m_preview.R")
-source("shiny/m_tables.R")
-source("shiny/m_graphs.R")
+source("programs_final/shiny/m_filter.R")
+source("programs_final/shiny/m_home.R")
+source("programs_final/shiny/m_preview.R")
+source("programs_final/shiny/m_tables.R", chdir = TRUE)
+source("programs_final/shiny/m_graphs.R", chdir = TRUE)
 
 ui <- fluidPage(
   titlePanel("R in Pharma 2021 Workshop"),
