@@ -3,7 +3,7 @@ library(dplyr)
 library(lubridate)
 
 vs <- readRDS("data_demo/VS.rds")
-adsl <-
+adsl <- readRDS("data_demo/ADSL.rds")
 
 param_lookup <- tibble::tribble(
   ~VSTESTCD, ~PARAMCD, ~PARAM,
@@ -26,58 +26,89 @@ range_lookup <- tibble::tribble(
 advs <- vs %>%
 
   # Join ADSl variables
-  *_join(adsl) %>%
+  left_join(adsl) %>%
 
   # ADTM
   derive_vars_dtm(
     new_vars_prefix = "A",
-    dtc = VSDTC,
-    time_imputation = ,
-    flag_imputation =
+    dtc = VSDTC
+    #time_imputation =,
+    #flag_imputation =
   ) %>%
 
   # ADTM -> ADT
-   %>%
+mutate(ADT = ADTM) %>%
 
-  # ADT
-  derive_ %>%
+#  # ADT
+#  derive_vars_dt (
+#    new_vars_prefix = "AST",
+#    dtc = ADT
+#)
+
+derive_var_ady(reference_date = TRTSDT, date = ADT) %>%
 
   # PARAMCD, PARAM etc.
-   %>%
+
+  left_join(param_lookup, by = "VSTESTCD") %>%
+
 
   # AVAL, AVALC
   mutate(
-    AVAL =,
-    AVALC =
+    AVAL = VSSTRESN,
+    AVALC = VSSTRESC,
   ) %>%
 
   # ONTRTFL
   derive_var_ontrtfl(
+    start_date = ADT,
+    ref_start_date = TRTSDT,
+    ref_end_date = TRTEDT
 
   ) %>%
-
-  # ABLFL
   derive_extreme_flag(
-
+    by_vars = vars(STUDYID, USUBJID, PARAMCD),
+    order = vars(ADT, VSSEQ),
+    new_var = ABLFL,
+    mode = "last",
+    filter = (!is.na(AVAL) & ADT <= TRTSDT)
   ) %>%
-
-  # BASE
-  derive_var_() %>%
-
-  # BASEC
-  derive_var_() %>%
-
-  # CHG
-  derive_var_() %>%
-
-  # PCHG
-  derive_var_() %>%
-
-  # Reference range
-
-  # ANRIND
-
-  # BNRIND
+  derive_var_base(
+    by_vars = vars(STUDYID, USUBJID, PARAMCD)
+  ) %>%
+  derive_var_basec(
+    by_vars = vars(STUDYID, USUBJID, PARAMCD)
+  ) %>%
+  derive_var_chg() %>%
+  derive_var_pchg() %>%
+  left_join(range_lookup, by = "PARAMCD") %>%
+  derive_var_anrind() %>%
   derive_baseline(
-
+    by_vars = vars(STUDYID, USUBJID, PARAMCD),
+    source_var = ANRIND,
+    new_var = BNRIND
   )
+  # # ABLFL
+  # derive_extreme_flag(
+  #
+  # ) %>%
+  #
+  # # BASE
+  # derive_var_base() %>%
+  #
+  # # BASEC
+  # derive_var_basec() %>%
+  #
+  # # CHG
+  # derive_var_chg() %>%
+  #
+  # # PCHG
+  # derive_var_pchg() %>%
+  #
+  # # Reference range
+  #
+  # # ANRIND
+  #
+  # # BNRIND
+  # derive_baseline(
+  #
+  # )
