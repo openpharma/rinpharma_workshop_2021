@@ -14,7 +14,7 @@ Setup packages with:
 ```r
 install.packages(c("rtables", "shiny", "DT"))
 
-remotes::install_github("Roche-GSK/admiral")
+remotes::install_github("Roche-GSK/admiral", ref = "devel")
 remotes::install_github("Roche/respectables")
 remotes::install_github("Roche/synthetic.cdisc.data")
 ```
