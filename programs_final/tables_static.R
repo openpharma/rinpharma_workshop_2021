@@ -19,7 +19,7 @@ adsl__IT <- adsl %>%
 adsl__SE <- adsl %>%
   filter(SAFFL == "Y")
 
-adsl__AGEG18 <- asl %>%
+adsl__AGEG18 <- adsl %>%
   filter(AGE > 18)
 
 
@@ -106,7 +106,7 @@ advs__SE <- advs %>%
 
 tbl_vs__SE <- t_vs(
   advs = advs__SE,
-  adsl = adsl_SE,
+  adsl = adsl__SE,
   title = "Vital Signs - Safety-Evaluable Population",
   subtitle = "Study: Sample Study with Synthetic Data, Cutoff Date: 2021-10-28",
   main_footer = "The tables is build using synthetic data."
