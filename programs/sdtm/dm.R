@@ -31,7 +31,7 @@ age_vars <- c("BRTHDTC", "AGE")
 DM_recipe <- tribble(
   ~variables,       ~dependencies,      ~func,               ~func_args,
   "STUDYID",        no_deps,            rep_n,              list(val = "a12345"),
-  "DOMAIN",         no_deps,            rep_n,              list(val = "incorrect"),
+  "DOMAIN",         no_deps,            rep_n,              list(val = "DM"),
   "USUBJID",        usub_dep,           make_usub,          NULL,
   "SUBJID",         no_deps,            subjid_func,        NULL,
   "RFSTDTC",        no_deps,            rand_posixct,       list(start = "2019-01-01", end = "2019-06-01"),
