@@ -16,7 +16,10 @@ source("programs_final/sdtm/ds.R")
 source("programs_final/sdtm/ex.R")
 
 # Modify dates here!
-
+source("programs/sdtm/functions/date_conversion.R")
+VS <- date_conversion(VS)
+AE <- date_conversion(AE)
+DM <- date_conversion(DM)
 
 
 saveRDS(DM, "data/DM.rds")
