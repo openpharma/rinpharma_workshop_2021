@@ -7,7 +7,7 @@ library(rtables)            # https://roche.github.io/rtables/
 
 # Resources ----
 # Vignette: https://roche.github.io/rtables/articles/clinical_trials.html
-# Specifications for tables: https://docs.google.com/presentation/d/1bmAtJO7auQHGdnZj2Pw7mgJu-x0oZtpgRGe66uupF-U/edit#slide=id.gfa0fc69b34_0_333
+# Specifications for tables: https://docs.google.com/document/d/1-2q14d4_CFvyG0EAhAqec3DMkRUmHPSe3BWugUSFBCM/edit?usp=sharing
 
 # Vital Signs Table ----
 
