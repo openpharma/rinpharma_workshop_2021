@@ -5,43 +5,28 @@ library(rtables)            # https://roche.github.io/rtables/
 # adsl <- readRDS("data_demo/ADSL.rds")
 
 # Resources ----
-# Specifications for tables: https://docs.google.com/document/d/1-2q14d4_CFvyG0EAhAqec3DMkRUmHPSe3BWugUSFBCM/edit?usp=sharing
 # Vignette: https://roche.github.io/rtables/articles/clinical_trials.html
 
 # Demographics Table ----
 
 # Analysis function
 s_summary_dm <- function(x) {
-
   if (is.numeric(x)) {
-
-    # Calculate the number of non-missing records in x
-    n <-
-
-    # Calculate mean and standard deviation of x
-    mean_sd <-
-
-    # Calculate median, 1st quartile, 3rd quartile of x
-    median_q1_q3 <-
-
-    # Calculate minimum and maximum of x
-    min_max <-
-
     in_rows(
-      "n" = rcell(n, format = "xx"),
-
-      # Add the remaining labels and formats for n, mean_sd, median_q1_q3 and min_max
-
+      "n" = rcell(sum(!is.na(x)), format = "xx"),
+      "Mean (SD)" = rcell(c(mean(x, na.rm = TRUE), sd(x, na.rm = TRUE)), format = "xx.xx (xx.xx)"),
+      "Median (Q1 - Q3)" = rcell(c(
+        median(x, na.rm = TRUE),
+        quantile(x, na.rm = TRUE, probs = c(0.25, 0.75))
+      ), format = "xx.xx (xx.xx - xx.xx)"),
+      "Min - Max" = rcell(range(x, na.rm = TRUE), format = "xx.xx - xx.xx")
     )
   } else if (is.factor(x)) {
 
-    # Calculate the number of non-missing records in x as a named list
-    n <- list(n = )
-
-    # Calculate the counts of each level in x as a named list
-    x_counts <-
-
-    vs <- c(n, x_counts)
+    vs <- c(
+      list("n" = sum(!is.na(x))),
+      as.list(table(x))
+    )
 
     do.call(in_rows, lapply(vs, rcell, format = "xx"))
 
@@ -56,21 +41,16 @@ s_summary_dm <- function(x) {
 
 t_dm <- function(adsl, title = "", subtitle = "", main_footer = "") {
 
-  # Create the table layout.
   lyt <- basic_table(
-
-    # Add title, subtitle and main_footer details here.
-
+    title = title,
+    subtitle = subtitle,
+    main_footer = main_footer
   ) %>%
-    # Add details here about the column variables.
-    split_cols_by(var = , split_fun = ) %>%
-
-    # Look up function used to add the column population counts to the header (N=xx) and add it to pipeline here.
-
-    # Add details here about analysis variables.
+    split_cols_by("ARM", split_fun = add_overall_level("All Patients", first = FALSE)) %>%
+    add_colcounts() %>%
     analyze(
-      vars = ,
-      var_labels = ,
+      vars = c("AGE", "SEX"),
+      var_labels = c("Age (years)", "Sex"),
       afun = s_summary_dm
     )
 
