@@ -23,6 +23,7 @@ you might need to set your `GITHUB_PAT` best with `usethis::usethis::edit_r_envi
 
 ## Important URLs
 
+* [Slide deck](https://docs.google.com/presentation/d/1Kw4A4cspxxmOGalxmialLC20mHCFYqEuijfuTHWg8VA/edit?usp=sharing)
 * [Form for GitHub accessp](https://docs.google.com/forms/d/e/1FAIpQLSc2R7KvQgjLUtWzqKRiDHWQTrKvlTYcSm2m8yjiUi8oeN1XyQ/viewform?usp=sf_link)
 * [RStudio Cloud](https://bit.ly/3m9rrJf)
 * [Meet Jitsi](https://meet.jit.si/)
