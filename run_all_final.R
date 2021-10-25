@@ -17,17 +17,17 @@ unlink(files_to_cleanup)
 
 
 ## Create synthetic SDTM data ----
-source("programs/SDTM.R")
+source("programs_final/SDTM.R")
 
 
 ## Create ADaM data ----
 
-source("programs/ADaM.R")
+source("programs_final/ADaM.R")
 
 
 ## Create Static Tables ----
 
-source("programs/tables_static.R")
+source("programs_final/tables_static.R")
 
 
 ## Check if required files are in the data and outputs folder ----
