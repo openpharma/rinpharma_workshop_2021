@@ -59,5 +59,3 @@ adsl <- dm %>%
     SAFFL = ,
     FASFL =
   )
-
-saveRDS(adsl, file = "data/ADSL.rds")

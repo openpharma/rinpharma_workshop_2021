@@ -67,5 +67,3 @@ adae <- ae %>%
   derive_extreme_flag(
 
   )
-
-saveRDS(adae, file = "data/ADAE.rds")

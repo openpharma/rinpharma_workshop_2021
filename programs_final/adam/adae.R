@@ -59,5 +59,3 @@ adae <- ae %>%
     filter = ANL01FL == "Y",
     mode = "last"
   )
-
-saveRDS(adae, file = "data/ADAE.rds")

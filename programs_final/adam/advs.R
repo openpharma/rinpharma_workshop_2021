@@ -65,5 +65,3 @@ advs <- vs %>%
     source_var = ANRIND,
     new_var = BNRIND
   )
-
-saveRDS(advs, file = "data/ADVS.rds")

@@ -81,5 +81,3 @@ advs <- vs %>%
   derive_baseline(
 
   )
-
-saveRDS(advs, file = "data/ADVS.rds")

@@ -55,5 +55,3 @@ adsl <- dm %>%
     SAFFL = if_else(!is.na(TRTSDT), "Y", NA_character_),
     FASFL = "Y"
   )
-
-saveRDS(adsl, file = "data/ADSL.rds")
