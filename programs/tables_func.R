@@ -11,13 +11,13 @@ library(rtables)            # https://roche.github.io/rtables/
 # Specifications for tables: https://docs.google.com/presentation/d/1bmAtJO7auQHGdnZj2Pw7mgJu-x0oZtpgRGe66uupF-U/edit#slide=id.gfa0fc69b34_0_333
 
 # Demographics Table ----
-source("tables_func/t_dm.R")
+source("programs/tables_func/t_dm.R")
 
 # Adverse Events Table ----
-source("tables_func/t_ae.R")
+source("programs/tables_func/t_ae.R")
 
 # Vital Signs Table ----
-source("tables_func/t_vs.R")
+source("programs/tables_func/t_vs.R")
 
 # Try it out:
 # t_dm(adsl)

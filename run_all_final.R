@@ -8,7 +8,7 @@ rm(list = ls()) # remove all objects from environment
 
 # all.files = FALSE in order to not include hidden files
 files_to_cleanup <- c(
-  list.files("data/", recursive = TRUE, all.files = FALSE, full.names = TRUE),
+  list.files("data_demo/", recursive = TRUE, all.files = FALSE, full.names = TRUE),
   list.files("outputs/", recursive = TRUE, all.files = FALSE, full.names = TRUE)
 )
 files_to_cleanup
