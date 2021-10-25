@@ -1,30 +1,31 @@
 library(shiny)
+library(magrittr)
 
 # source functions to create static outputs
 # we are expecting following functions to be defined there:
 # - t_dm - Demographics Table
 # - t_ae - Adverse Events Table
 # - t_vs - Vital Signs Table
-source("tables_func.R")
+source("programs/tables_func.R")
 
 # source ADAM datasets
 # uncomment below once we have a data ready
-# adsl <- source("adam/adsl.R")
-# adae <- source("adam/adae.R")
-# advs <- source("adam/advs.R")
+# adsl <- source("programs/adam/adsl.R")
+# adae <- source("programs/adam/adae.R")
+# advs <- source("programs/adam/advs.R")
 # data <- list(ADSL = adsl, ADAE = adae, ADVS = advs)
 data <- list(
-  ADSL = readRDS("../data_demo/ADSL.rds"),
-  ADAE = readRDS("../data_demo/ADAE.rds"),
-  ADVS = readRDS("../data_demo/ADVS.rds")
+  ADSL = readRDS("data_demo/ADSL.rds"),
+  ADAE = readRDS("data_demo/ADAE.rds"),
+  ADVS = readRDS("data_demo/ADVS.rds")
 )
 
 # source modules
-source("shiny/m_filter.R")
-source("shiny/m_home.R")
-source("shiny/m_preview.R")
-source("shiny/m_tables.R")
-source("shiny/m_graphs.R")
+source("programs/shiny/m_filter.R")
+source("programs/shiny/m_home.R")
+source("programs/shiny/m_preview.R")
+source("programs/shiny/m_tables.R", chdir = TRUE)
+source("programs/shiny/m_graphs.R", chdir = TRUE)
 
 ui <- fluidPage(
   titlePanel("R in Pharma 2021 Workshop"),

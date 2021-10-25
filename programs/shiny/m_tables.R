@@ -1,6 +1,6 @@
-source("shiny/m_tables_dm.R")
-source("shiny/m_tables_ae.R")
-source("shiny/m_tables_vs.R")
+source("m_tables_dm.R")
+source("m_tables_ae.R")
+source("m_tables_vs.R")
 
 m_tables_ui <- function(id) {
   ns <- NS(id)
