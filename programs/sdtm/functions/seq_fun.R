@@ -1,5 +1,6 @@
 seq_fun <- function(.df, n){
-  usubjid <- .df$USUBJID
-  return(1)
+  spl <- split(seq_along(.df$USUBJID), .df$USUBJID)
+  sp <-lapply(spl, function(x){seq_along(x)})
+  unlist(sp)
 
 }
