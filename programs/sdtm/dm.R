@@ -18,7 +18,7 @@ s_race <- c(
   "MULTIPLE", "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER", "OTHER", "UNKNOWN"
 )
 
-
+s_country <- c("CHN", "RUS", "USA", "PAK", "BRA", "CAN", "GBR", "JPN")
 usub_dep  <- c("STUDYID", "SUBJID", "SITEID")
 rfe_deps <- c("RFSTDTC", "DTHDTC")
 date_vars <- c("RFENDTC", "RFXSTDTC", "RFXENDTC")
@@ -44,7 +44,7 @@ DM_recipe <- tribble(
   "RACE",           no_deps,            sample_fct,         list(x = s_race),
   "ARMCD",          no_deps,            sample_fct,         list(x = c("A1", "A2", "A3")),
   "ARM",            "ARMCD",            make_arm,           list(arms = c("ARM 1" = "A1", "ARM 2" = "A2", "ARM 3" = "A3")),
-  "COUNTRY",        no_deps,            sample_fct,         list(x = s_race)
+  "COUNTRY",        no_deps,            sample_fct,         list(x = s_country)
 )
 
 
