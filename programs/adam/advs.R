@@ -2,7 +2,7 @@ library(admiral)
 library(dplyr)
 library(lubridate)
 
-vs <- readRDS("data/VS.rds")
+vs <- readRDS("data_demo/VS.rds")
 adsl <-
 
 param_lookup <- tibble::tribble(
