@@ -1,4 +1,5 @@
 visitn_fn <- function(.df, n){
-  visit <- .df$VISIT
-  sample(c(1, 5), n, replace = TRUE)
+  as.numeric(ifelse(grepl("\\d", .df$VISIT),
+                    regmatches(.df$VISIT,regexpr("\\d",.df$VISIT)),
+                    1))
 }
